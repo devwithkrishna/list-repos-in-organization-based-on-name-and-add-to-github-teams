@@ -31,6 +31,8 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.DEVWITHKRISHNA_PERSONAL_ACCESS_TOKEN }}
     steps:
+      - name: Git checkout
+        uses: actions/checkout@v4
       - name: set up python
         uses: actions/setup-python@v5
         with:
