@@ -113,7 +113,6 @@ def main():
     parser.add_argument("--search_string", required=True, type=str, help="github repo name search string")
     parser.add_argument("--permission", required=True,choices=['admin', 'push', 'pull', 'triage', 'maintain'], help="Permissions for Github teams across repository" )
     args = parser.parse_args()
-    os.environ["GH_TOKEN"] = "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"
     org_name = args.org_name
     github_team_name = args.github_team_name
     search_string = args.search_string
