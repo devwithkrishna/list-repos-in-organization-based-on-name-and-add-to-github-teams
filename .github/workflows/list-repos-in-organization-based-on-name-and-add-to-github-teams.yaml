@@ -1,0 +1,50 @@
+name: list-repos-in-organization-based-on-name-and-add-to-github-teams
+on:
+  workflow_dispatch:
+    inputs:
+      org_name:
+        description: 'GitHub organization name'
+        type: string
+        required: true
+      github_team_name:
+        description: 'GithHub team name'
+        type: string
+        required: true
+      search_string:
+        required: true
+        description: 'GitHub repo name search string'
+        type: string
+      permission:
+        required: true
+        description: 'Permissions for Github teams across repository'
+        type: choice
+        options:
+          - admin
+          - push
+          - pull
+          - triage
+          - maintain
+
+jobs:
+  list-repos-in-organization-based-on-name-and-add-to-github-teams:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.DEVWITHKRISHNA_PERSONAL_ACCESS_TOKEN }}
+    steps:
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Pipenv venv installation
+        run: |
+          pip install pipenv 
+          pipenv install --skip-lock
+      - name: Execute python program
+        run: |
+          pipenv run python3 list_repos_and_add_to_teams.py --org_name ${{ inputs.org_name }} \
+          --github_team_name ${{ inputs.github_team_name }} --search_string ${{ inputs.search_string }} \
+          --permission ${{ inputs.permission }}
+      - name: program execution completed
+        run: echo "program execution completed"
+          
+          
