@@ -10,7 +10,7 @@ def list_repos_and_add_to_github_teams(org_name: str, github_team_name: str, sea
     """
     # GitHub endpoint for listing repos under an organization
     repo_url = f"https://api.github.com/orgs/{org_name}/repos"
-    print(f"github api endpoint url {repo_url}")
+    # print(f"github api endpoint url {repo_url}")
 
     headers = {
         "Accept": "application/vnd.github+json",
@@ -60,7 +60,7 @@ def list_repos_and_add_to_github_teams(org_name: str, github_team_name: str, sea
     ### Adding repos to teams ###
     # GitHub endpoint for listing teamws under an organization
     team_url = f"https://api.github.com/orgs/{org_name}/teams?per_page={per_page}"
-    print(f"github api endpoint url {team_url}")
+    # print(f"github api endpoint url {team_url}")
 
     headers = {
         "Accept": "application/vnd.github+json",
@@ -72,7 +72,6 @@ def list_repos_and_add_to_github_teams(org_name: str, github_team_name: str, sea
         params = {'per_page': per_page, 'page': page}
         response = requests.get(team_url, headers=headers, params=params)
         response_json = response.json() ## Github team details
-        print("wait")
 
         team_slug = ""  # defining empty team slug
         for team in response_json:
@@ -85,7 +84,7 @@ def list_repos_and_add_to_github_teams(org_name: str, github_team_name: str, sea
 
             # GitHub endpoint for adding repos to a team in an organization
             repo_addition_url = f"https://api.github.com/orgs/{org_name}/teams/{team_slug}/repos/{repo}"
-            print(f"github api endpoint url {repo_addition_url}")
+            # print(f"github api endpoint url {repo_addition_url}")
 
             headers = {
                 "Accept": "application/vnd.github+json",
